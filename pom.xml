@@ -15,7 +15,7 @@
         <version>2.0.3.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    
+
     <modules>
         <module>auth-service</module>
         <module>gateway-demo</module>
