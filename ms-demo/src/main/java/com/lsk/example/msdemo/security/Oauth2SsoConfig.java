@@ -21,7 +21,8 @@ public class Oauth2SsoConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/test").permitAll()
                 .anyRequest().authenticated()
+//                .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and().csrf().disable();
-//                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+
     }
 }

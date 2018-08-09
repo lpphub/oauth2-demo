@@ -47,8 +47,8 @@ security:
     client:
       client-id: test
       client-secret: 123456
-      access-token-uri: http://localhost:8101/uaa/oauth/token  # sso重定向可以走网关的负载
-      user-authorization-uri: http://localhost:8101/uaa/oauth/authorize  #为@EnableOAuth2Sso配置授权服务
+      access-token-uri: http://localhost:8102/uaa/oauth/token  # sso重定向可以走网关的负载?
+      user-authorization-uri: http://localhost:8102/uaa/oauth/authorize  #为@EnableOAuth2Sso配置授权服务
       use-current-uri: false
     resource:
       id: ${spring.application.name}
