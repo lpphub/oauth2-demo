@@ -1,0 +1,4 @@
+com/lsk/example/bootweb/BootWebApplication.class
+com/lsk/example/bootweb/controller/TestConfiguration.class
+com/lsk/example/bootweb/controller/AppController.class
+com/lsk/example/bootweb/TestPostProcessor.class

@@ -1,0 +1,45 @@
+server:
+  port: 8101
+
+spring:
+  application:
+    name: gateway-routers
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false # 开启gateway服务发现
+          lower-case-service-id: true
+          filters:
+            - SaveSession
+      routes:
+      - id: auth-server
+        uri: http://localhost:8102
+        predicates:
+        - Path=/uaa/**
+        filters:
+        - SaveSession
+      - id: ms-demo
+        uri: http://localhost:8103
+        predicates:
+        - Path=/ms/**
+        filters:
+        - SaveSession
+
+
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://ad:ad@eureka-ad.bjcq.zybang.com:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+      gateway:
+        enabled: true

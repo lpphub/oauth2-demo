@@ -1,0 +1,58 @@
+server:
+  port: 8103
+  servlet:
+    context-path: /ms #在localhost上同时运行客户端和auth服务器，上下文路径必须是显式的，否则cookie路径会发生冲突，并且两个应用程序无法就会话标识符达成一致
+
+spring:
+  application:
+    name: ms-demo
+  security:
+    user:
+      name: admin
+      password: 123456
+#  security:
+#    oauth2:
+#      client:
+#        registration:  # 配置oauth2的多个登陆端点
+#          auth:
+#            client-id: test
+#            client-secret: 123456
+#            client-name: auth-server
+#            authorization-grant-type: authorization_code
+#            redirect-uri-template: http://localhost:8103/login/oauth2/code/auth #code回调，这里存在跨域问题
+#            scope:
+#              - all
+#            provider: auth
+#        provider:  # 配置oauth2的授权服务
+#          auth:
+#            authorization-uri: http://localhost:8102/oauth/authorize
+#            token-uri: http://localhost:8102/oauth/token
+#            user-info-uri: http://localhost:8102/me
+
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true
+  client:
+    enabled: true
+    serviceUrl:
+      defaultZone: http://ad:ad@eureka-ad.bjcq.zybang.com:8761/eureka/
+
+uaa-base-url: auth-server/uaa
+
+security:
+  oauth2:
+    sso:
+      login-path: /login
+    client:
+      client-id: test
+      client-secret: 123456
+      access-token-uri: http://localhost:8101/uaa/oauth/token  # sso重定向可以走网关的负载
+      user-authorization-uri: http://localhost:8101/uaa/oauth/authorize  #为@EnableOAuth2Sso配置授权服务
+      use-current-uri: false
+    resource:
+      id: ${spring.application.name}
+      token-info-uri: http://${uaa-base-url}/oauth/check_token
+      user-info-uri: http://${uaa-base-url}/me
+      prefer-token-info: false #如果同时定义了token-info与user-info，该值决定使用哪个来验证授权token
+      loadBalanced: true  # 配置支持从eureka注册中心根据服务名获取接口信息
