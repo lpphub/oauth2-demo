@@ -36,7 +36,7 @@ eureka:
   client:
     enabled: true
     serviceUrl:
-      defaultZone: http://ad:ad@eureka-ad.bjcq.zybang.com:8761/eureka/
+      defaultZone: http://ad:ad@test.eureka.co:8761/eureka/
 
 uaa-base-url: auth-server/uaa
 
