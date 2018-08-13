@@ -14,18 +14,13 @@ spring:
             - SaveSession
       routes:
       - id: auth-server
-        uri: http://localhost:8102
+        uri: lb://auth-server
         predicates:
         - Path=/uaa/**
-        filters:
-        - SaveSession
       - id: ms-demo
-        uri: http://localhost:8103
+        uri: lb://ms-demo   # 当前版本不支持重定向，后续版本修复 github#435
         predicates:
         - Path=/ms/**
-        filters:
-        - SaveSession
-
 
 eureka:
   instance:
@@ -33,7 +28,7 @@ eureka:
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://ad:ad@test.eureka.co:8761/eureka/
+      defaultZone: http://ad:ad@test.eureka.com:8761/eureka/
 
 management:
   endpoints:
@@ -43,3 +38,10 @@ management:
   endpoint:
       gateway:
         enabled: true
+
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.http.server.reactive: DEBUG
+    org.springframework.web.reactive: DEBUG
+    reactor.ipc.netty: DEBUG

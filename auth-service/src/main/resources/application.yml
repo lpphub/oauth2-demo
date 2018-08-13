@@ -13,4 +13,4 @@ eureka:
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://ad:ad@test.eureka.co:8761/eureka/
+      defaultZone: http://ad:ad@test.eureka.com:8761/eureka/
