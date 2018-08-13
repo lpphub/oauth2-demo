@@ -1,0 +1,16 @@
+server:
+  port: 8100
+spring:
+  security:
+    user:
+      password: 123456
+
+
+#eureka:
+#  instance:
+#    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+#    prefer-ip-address: true
+#  client:
+#    enabled: true
+#    serviceUrl:
+#      defaultZone: http://ad:ad@test.eureka.com:8761/eureka/
