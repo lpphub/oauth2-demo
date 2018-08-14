@@ -9,7 +9,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().permitAll()
+        http.authorizeRequests().anyRequest().authenticated()
+                .and().httpBasic() //支持sba server检查授权
                 .and().csrf().disable();
     }
 

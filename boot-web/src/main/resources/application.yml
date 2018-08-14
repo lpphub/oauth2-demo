@@ -7,11 +7,19 @@ spring:
   boot:
     admin:
       client:
-        url: "http://localhost:8100"
+        url: http://localhost:8100
+        username: user     # 注册服务端用户名密码
+        password: 123456
         instance:
+          name: boot-demo
           metadata:
-            user.name: user
-            user.password: 123456
+            user.name: ${spring.security.user.name}  # 客户端用户名密码
+            user.password: ${spring.security.user.password}
+  security:
+    user:
+      name: admin
+      password: 111111
+
 management:
   endpoints:
     web:
